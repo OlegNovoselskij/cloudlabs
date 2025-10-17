@@ -363,12 +363,30 @@ def _init_swagger(app: Flask) -> None:
         @api.marshal_list_with(user_model)
         def get(self):
             """Get all users"""
-            try:
-                from my_project.auth.dao.orders.UserDAO import UserDAO
-                return get_dao_data(UserDAO)
-            except Exception as e:
-                print(f"Error getting users: {e}")
-                return []
+            # Захардкоджені тестові дані
+            return [
+                {
+                    "id": 1,
+                    "user_id": 1,
+                    "username": "admin",
+                    "email": "admin@cloudlabs.com",
+                    "role": "admin"
+                },
+                {
+                    "id": 2,
+                    "user_id": 2,
+                    "username": "user",
+                    "email": "user@cloudlabs.com",
+                    "role": "user"
+                },
+                {
+                    "id": 3,
+                    "user_id": 3,
+                    "username": "testuser",
+                    "email": "test@example.com",
+                    "role": "user"
+                }
+            ]
         
         @api.doc(security='Bearer')
         @token_required
